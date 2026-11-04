@@ -2167,6 +2167,17 @@ def save_session():
 
 
 # ── 10) LAUNCH (local dev only — Render uses gunicorn via Procfile) ──────
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port, debug=False)
+import streamlit as st
+
+st.set_page_config(page_title="Intelligent Legal Guidance", layout="wide")
+st.title("⚖️ Intelligent Legal Guidance Platform")
+
+st.write("Enter your legal issue below to begin the analysis:")
+problem_input = st.text_area("Describe your problem:", placeholder="e.g., I faced an unauthorized transaction from my bank account...")
+
+if st.button("Analyze Case"):
+    if problem_input:
+        # Call your search / FAISS / Groq functions here
+        st.success("Case analyzed successfully!")
+    else:
+        st.warning("Please describe your legal issue.")
